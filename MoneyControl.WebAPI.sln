@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyControl.WebAPI", "MoneyControl.WebAPI\MoneyControl.WebAPI.csproj", "{016ACCB7-A5A8-45DC-BD2E-9608E7E893F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyControl.WebAPI.Host", "MoneyControl.WebAPI\MoneyControl.WebAPI.Host.csproj", "{016ACCB7-A5A8-45DC-BD2E-9608E7E893F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyControl.WebAPI.Domain", "MoneyControl.WebAPI.Domain\MoneyControl.WebAPI.Domain.csproj", "{4F6426FC-041C-4A18-B96C-4D3D4358BE47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyControl.WebAPI.Domain", "MoneyControl.WebAPI.Domain\MoneyControl.WebAPI.Domain.csproj", "{4F6426FC-041C-4A18-B96C-4D3D4358BE47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
