@@ -15,4 +15,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyControl.WebAPI.Data\MoneyControl.WebAPI.Data.csproj" />
+  </ItemGroup>
+
 </Project>

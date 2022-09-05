@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyControl.WebAPI.Host", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyControl.WebAPI.Domain", "MoneyControl.WebAPI.Domain\MoneyControl.WebAPI.Domain.csproj", "{4F6426FC-041C-4A18-B96C-4D3D4358BE47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyControl.WebAPI.Data", "MoneyControl.WebAPI.Data\MoneyControl.WebAPI.Data.csproj", "{C71678E6-1327-4DBD-9BE5-B4CC26AEE792}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4F6426FC-041C-4A18-B96C-4D3D4358BE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F6426FC-041C-4A18-B96C-4D3D4358BE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F6426FC-041C-4A18-B96C-4D3D4358BE47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C71678E6-1327-4DBD-9BE5-B4CC26AEE792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71678E6-1327-4DBD-9BE5-B4CC26AEE792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C71678E6-1327-4DBD-9BE5-B4CC26AEE792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C71678E6-1327-4DBD-9BE5-B4CC26AEE792}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
