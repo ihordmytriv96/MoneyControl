@@ -16,6 +16,7 @@ namespace MoneyControl.WebAPI.Host.Config.Dependencies
 
             // Mapper
 
+            MapperRegisterDependencies.RegisterDependencies(services);
         }
     }
 }

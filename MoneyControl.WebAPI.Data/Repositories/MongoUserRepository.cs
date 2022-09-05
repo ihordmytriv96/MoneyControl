@@ -11,5 +11,6 @@ namespace MoneyControl.WebAPI.Data.Repositories
         }
 
         public override string CollectionName { get; set; } = "Users";
+
     }
 }

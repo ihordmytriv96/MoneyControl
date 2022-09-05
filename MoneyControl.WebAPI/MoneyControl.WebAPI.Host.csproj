@@ -12,10 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\MoneyControl.WebAPI.Application\MoneyControl.WebAPI.Application.csproj" />
     <ProjectReference Include="..\MoneyControl.WebAPI.Data\MoneyControl.WebAPI.Data.csproj" />
   </ItemGroup>
 
