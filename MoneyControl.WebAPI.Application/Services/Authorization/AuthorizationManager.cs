@@ -1,5 +1,4 @@
-﻿using Bogus;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using MoneyControl.WebAPI.Application.Contracts.Authorization;
 using MoneyControl.WebAPI.Application.Contracts.Authorization.Utilities;
 using MoneyControl.WebAPI.Application.Exceptions;
