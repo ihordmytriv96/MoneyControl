@@ -28,16 +28,18 @@ namespace MoneyControl.WebAPI.Host.Middlewares
                 {
                     case WrongPasswordException e:
                     case UserNotFoundException u:
-                        // custom application error
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
                     case InvalidRefreshTokenException e:
                     case RefreshTokenExpiredException u:
-                        // not found error
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
+                    case InvalidLoginException log:
+                    case InvalidPasswordException pas:
+                    case UserAlreadyIsInDatabaseException already:
+                        response.StatusCode = (int)HttpStatusCode.Conflict;
+                        break;
                     default:
-                        // unhandled error
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
                 }
