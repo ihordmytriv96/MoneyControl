@@ -1,0 +1,39 @@
+﻿using MoneyControl.WebAPI.Application.Contracts.Validations;
+using MoneyControl.WebAPI.Application.Exceptions;
+using MoneyControl.WebAPI.Application.Services.Models.AuthModels;
+using MoneyControl.WebAPI.Domain.Contracts.Repositories;
+
+namespace MoneyControl.WebAPI.Application.Services.Validations
+{
+    public class UserValidationManager : IBaseValidator<UserModel>
+    {
+        private readonly IUserRepository _userRepository;
+
+        public UserValidationManager(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
+        public async Task IsValidAsync(UserModel user, CancellationToken token)
+        {
+            var login = string.IsNullOrEmpty(user.Login);
+            var password = string.IsNullOrEmpty(user.Password);
+
+            var userIsInDatabase = await _userRepository.FindOneAsync(x => x.Login == user.Login, token) != null;
+
+            if (login || (user.Login.Length < 5 || user.Login.Length > 15))
+            {
+                throw new InvalidLoginException("Login must have min 5 max 15 symbols");
+            }
+            else if (password || (user.Password.Length < 5 || user.Password.Length > 10))
+            {
+                throw new InvalidPasswordException("Password must have min 5 max 10 symbols");
+            }
+            else if (userIsInDatabase)
+            {
+                throw new UserAlreadyIsInDatabaseException("User already exist");
+            }
+        }
+
+    }
+}

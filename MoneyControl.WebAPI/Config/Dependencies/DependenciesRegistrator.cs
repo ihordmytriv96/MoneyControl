@@ -6,7 +6,7 @@ namespace MoneyControl.WebAPI.Host.Config.Dependencies
     {
         public static void RegisterDependencies(IServiceCollection services)
         {
-        
+
             // Data
 
             MongoDbRegisterDependencies.RegisterDependencies(services);
@@ -16,6 +16,7 @@ namespace MoneyControl.WebAPI.Host.Config.Dependencies
             TokenCreatorRegisterDependencies.RegisterDependencies(services);
             HashProcessorRegisterDependencies.RegisterDependencies(services);
             AuthorizationManagerRegisterDependencies.RegisterDependencies(services);
+            ValidatorsRegisterDependencies.RegisterDependencies(services);
 
             // Mapper
 

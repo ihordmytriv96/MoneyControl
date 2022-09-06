@@ -1,4 +1,5 @@
 using MoneyControl.WebAPI.Host.Config.Dependencies;
+using MoneyControl.WebAPI.Host.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,5 +26,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.Run();
