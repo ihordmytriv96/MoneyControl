@@ -2,6 +2,6 @@
 {
     public interface ITokenRefresher
     {
-        public Task<string> RefreshTokensAsync();
+        public Task<string> RefreshTokensAsync(CancellationToken cancellationToken );
     }
 }

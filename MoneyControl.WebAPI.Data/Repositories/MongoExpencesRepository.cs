@@ -9,7 +9,6 @@ namespace MoneyControl.WebAPI.Data.Repositories
         public MongoExpencesRepository(IMongoDbSettings settings) : base(settings)
         {
         }
-
         public override string CollectionName { get; set; } = "Expences";
     }
 }

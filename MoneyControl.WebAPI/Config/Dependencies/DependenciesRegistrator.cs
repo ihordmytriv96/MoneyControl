@@ -12,11 +12,18 @@ namespace MoneyControl.WebAPI.Host.Config.Dependencies
             MongoDbRegisterDependencies.RegisterDependencies(services);
 
             // Application
-
+            TokenRefresherRegisterDependencies.RegisterDependencies(services);
+            TokenCreatorRegisterDependencies.RegisterDependencies(services);
+            HashProcessorRegisterDependencies.RegisterDependencies(services);
+            AuthorizationManagerRegisterDependencies.RegisterDependencies(services);
 
             // Mapper
 
             MapperRegisterDependencies.RegisterDependencies(services);
+
+            // HttpContext
+
+            HttpContextAccessorRegisterDependencies.RegisterDependencies(services);
         }
     }
 }

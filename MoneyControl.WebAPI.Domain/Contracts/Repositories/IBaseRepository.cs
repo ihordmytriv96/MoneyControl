@@ -11,5 +11,6 @@ namespace MoneyControl.WebAPI.Domain.Contracts.Repositories
         public Task<TEntity> CreateAsync(TEntity entity, CancellationToken token);
         public Task<TEntity> RemoveAsync(string Id, CancellationToken token);
         public Task<TEntity> UpdateAsync(TEntity entity, CancellationToken token);
+        public Task<TEntity> FindOneAsync(Expression<Func<TEntity, bool>> filter, CancellationToken token);
     }
 }
