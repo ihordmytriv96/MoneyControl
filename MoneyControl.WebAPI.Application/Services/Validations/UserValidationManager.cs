@@ -14,25 +14,28 @@ namespace MoneyControl.WebAPI.Application.Services.Validations
             _userRepository = userRepository;
         }
 
-        public async Task IsValidAsync(UserModel user, CancellationToken token)
+        public async Task<List<string>> IsValidAsync(UserModel user, CancellationToken token)
         {
             var login = string.IsNullOrEmpty(user.Login);
             var password = string.IsNullOrEmpty(user.Password);
 
             var userIsInDatabase = await _userRepository.FindOneAsync(x => x.Login == user.Login, token) != null;
+            var errorList = new List<string>();
 
             if (login || (user.Login.Length < 5 || user.Login.Length > 15))
             {
-                throw new InvalidLoginException("Login must have min 5 max 15 symbols");
+                errorList.Add("Login must have min 5 max 15 symbols");
             }
             else if (password || (user.Password.Length < 5 || user.Password.Length > 10))
             {
-                throw new InvalidPasswordException("Password must have min 5 max 10 symbols");
+                errorList.Add("Password must have min 5 max 10 symbols");
             }
             else if (userIsInDatabase)
             {
-                throw new UserAlreadyIsInDatabaseException("User already exist");
+                errorList.Add("User already exist");
             }
+
+            return errorList;
         }
 
     }
