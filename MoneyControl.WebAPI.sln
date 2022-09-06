@@ -5,6 +5,12 @@ VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyControl.WebAPI.Host", "MoneyControl.WebAPI\MoneyControl.WebAPI.Host.csproj", "{016ACCB7-A5A8-45DC-BD2E-9608E7E893F5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyControl.WebAPI.Domain", "MoneyControl.WebAPI.Domain\MoneyControl.WebAPI.Domain.csproj", "{4F6426FC-041C-4A18-B96C-4D3D4358BE47}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyControl.WebAPI.Data", "MoneyControl.WebAPI.Data\MoneyControl.WebAPI.Data.csproj", "{C71678E6-1327-4DBD-9BE5-B4CC26AEE792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyControl.WebAPI.Application", "MoneyControl.WebAPI.Application\MoneyControl.WebAPI.Application.csproj", "{2C45145D-57F3-43EF-9289-3946D3ED5C3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{016ACCB7-A5A8-45DC-BD2E-9608E7E893F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{016ACCB7-A5A8-45DC-BD2E-9608E7E893F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{016ACCB7-A5A8-45DC-BD2E-9608E7E893F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F6426FC-041C-4A18-B96C-4D3D4358BE47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F6426FC-041C-4A18-B96C-4D3D4358BE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F6426FC-041C-4A18-B96C-4D3D4358BE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F6426FC-041C-4A18-B96C-4D3D4358BE47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C71678E6-1327-4DBD-9BE5-B4CC26AEE792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71678E6-1327-4DBD-9BE5-B4CC26AEE792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C71678E6-1327-4DBD-9BE5-B4CC26AEE792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C71678E6-1327-4DBD-9BE5-B4CC26AEE792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C45145D-57F3-43EF-9289-3946D3ED5C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C45145D-57F3-43EF-9289-3946D3ED5C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C45145D-57F3-43EF-9289-3946D3ED5C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C45145D-57F3-43EF-9289-3946D3ED5C3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
