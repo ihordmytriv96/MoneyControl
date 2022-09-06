@@ -8,7 +8,7 @@ namespace MoneyControl.WebAPI.Data.Repositories
 {
     public abstract class MongoBaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
-        private readonly IMongoCollection<TEntity> _collection;
+        protected readonly IMongoCollection<TEntity> _collection;
         public abstract string CollectionName { get; set; }
         public MongoBaseRepository(IMongoDbSettings settings)
         {
@@ -50,6 +50,10 @@ namespace MoneyControl.WebAPI.Data.Repositories
             };
             var filter = Builders<TEntity>.Filter.Eq(e => e.Id, entity.Id);
             return await _collection.FindOneAndReplaceAsync(filter, entity, options);
+        }
+        public async Task<TEntity> FindOneAsync(Expression<Func<TEntity, bool>> filter, CancellationToken token)
+        {
+            return (await _collection.FindAsync(filter)).FirstOrDefault();
         }
     }
 }

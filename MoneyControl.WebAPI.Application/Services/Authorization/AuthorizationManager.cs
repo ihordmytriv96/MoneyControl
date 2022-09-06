@@ -5,6 +5,7 @@ using MoneyControl.WebAPI.Application.Exceptions;
 using MoneyControl.WebAPI.Application.Services.Models.AuthModels;
 using MoneyControl.WebAPI.Domain.Contracts.Repositories;
 using MoneyControl.WebAPI.Domain.Entities;
+using System.Security.Claims;
 
 namespace MoneyControl.WebAPI.Application.Services.Authorization
 {
@@ -42,16 +43,25 @@ namespace MoneyControl.WebAPI.Application.Services.Authorization
             var accessToken = _tokenCreator.CreateAccessToken(user);
 
             var refreshToken = _tokenCreator.CreateRefreshToken();
+            SetRefreshToken(user, refreshToken);
+            await _userRepository.UpdateAsync(user, token);
 
-
+            return accessToken;
         }
 
-        public Task LogoutAsync()
+        public async Task LogoutAsync(CancellationToken token)
         {
-            throw new NotImplementedException();
+            var userName = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+            var user = await _userRepository.FindOneAsync(x => x.Login == userName, token);
+            if (user == null)
+            {
+                throw new UserNotFoundException("User not found");
+            }
+
+            user.RefreshToken = String.Empty;
         }
 
-        public void RegisterUser(UserModel userModel, CancellationToken token)
+        public async Task RegisterUserAsync(UserModel userModel, CancellationToken token)
         {
             User user = new User();
             _hashProcessor.CreatePasswordHash(userModel.Password, out byte[] PasswordSalt, out byte[] PasswordHash);
@@ -59,8 +69,7 @@ namespace MoneyControl.WebAPI.Application.Services.Authorization
             user.PasswordHash = PasswordHash;
             user.PasswordSalt = PasswordSalt;
 
-            _userRepository.CreateAsync(user, token);
-
+            await _userRepository.CreateAsync(user, token);
         }
 
         public void SetRefreshToken(User user, RefreshToken refreshToken)
