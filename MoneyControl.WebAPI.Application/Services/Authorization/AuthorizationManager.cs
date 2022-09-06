@@ -47,6 +47,7 @@ namespace MoneyControl.WebAPI.Application.Services.Authorization
             await _userRepository.UpdateAsync(user, token);
 
             return accessToken;
+
         }
 
         public async Task LogoutAsync(CancellationToken token)
