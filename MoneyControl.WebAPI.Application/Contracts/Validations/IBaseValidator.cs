@@ -2,6 +2,6 @@
 {
     public interface IBaseValidator<TEntity>
     {
-        public Task IsValidAsync(TEntity entity, CancellationToken token);
+        public Task<List<string>> IsValidAsync(TEntity entity, CancellationToken token);
     }
 }

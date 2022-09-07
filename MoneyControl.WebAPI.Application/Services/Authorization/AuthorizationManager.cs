@@ -53,18 +53,16 @@ namespace MoneyControl.WebAPI.Application.Services.Authorization
         {
             var userName = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
             var user = await _userRepository.FindOneAsync(x => x.Login == userName, token);
-            if (user == null)
-            {
-                throw new UserNotFoundException("User not found");
-            }
 
             user.RefreshToken = String.Empty;
+            user.TokenCreated = null;
+            user.TokenExpires = null;
         }
 
         public async Task RegisterUserAsync(UserModel userModel, CancellationToken token)
         {
             User user = new User();
-            _hashProcessor.CreatePasswordHash(userModel.Password, out byte[] PasswordSalt, out byte[] PasswordHash);
+            _hashProcessor.CreatePasswordHash(userModel.Password, out byte[] PasswordHash, out byte[] PasswordSalt);
             user.Login = userModel.Login;
             user.PasswordHash = PasswordHash;
             user.PasswordSalt = PasswordSalt;
