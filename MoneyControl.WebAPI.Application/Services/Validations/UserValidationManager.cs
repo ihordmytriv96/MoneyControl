@@ -1,5 +1,4 @@
 ﻿using MoneyControl.WebAPI.Application.Contracts.Validations;
-using MoneyControl.WebAPI.Application.Exceptions;
 using MoneyControl.WebAPI.Application.Services.Models.AuthModels;
 using MoneyControl.WebAPI.Domain.Contracts.Repositories;
 

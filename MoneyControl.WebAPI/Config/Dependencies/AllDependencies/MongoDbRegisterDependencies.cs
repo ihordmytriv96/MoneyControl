@@ -18,8 +18,8 @@ namespace MoneyControl.WebAPI.Host.Config.Dependencies.AllDependencies
 
             // Repositories
 
-            services.AddTransient<IExpencesRepository, MongoExpencesRepository>();
-            services.AddTransient<IExpencesTypeRepository, MongoExpencesTypeRepository>();
+            services.AddTransient<IExpensesRepository, MongoExpensesRepository>();
+            services.AddTransient<IExpensesTypeRepository, MongoExpensesTypeRepository>();
             services.AddTransient<IUserRepository, MongoUserRepository>();
         }
     }

@@ -47,6 +47,7 @@ namespace MoneyControl.WebAPI.Host.Controllers
             {
                 return BadRequest(validList);
             }
+
             await _userValidator.IsValidAsync(model, token);
             await _authManager.RegisterUserAsync(model, token);
             return Ok("Register complite");
