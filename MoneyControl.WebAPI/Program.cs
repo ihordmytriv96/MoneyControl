@@ -1,4 +1,5 @@
 using MoneyControl.WebAPI.Host.Config.Dependencies;
+using MoneyControl.WebAPI.Host.Config.SwaggerAuthWindow;
 using MoneyControl.WebAPI.Host.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+RegisterAuthWindow.RegisterWindow(builder.Services);
 
 DependenciesRegistrator.RegisterDependencies(builder.Services);
 
@@ -22,6 +25,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

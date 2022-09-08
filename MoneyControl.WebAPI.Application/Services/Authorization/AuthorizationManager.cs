@@ -57,6 +57,8 @@ namespace MoneyControl.WebAPI.Application.Services.Authorization
             user.RefreshToken = String.Empty;
             user.TokenCreated = null;
             user.TokenExpires = null;
+
+            await _userRepository.UpdateAsync(user, token);
         }
 
         public async Task RegisterUserAsync(UserModel userModel, CancellationToken token)
@@ -66,6 +68,8 @@ namespace MoneyControl.WebAPI.Application.Services.Authorization
             user.Login = userModel.Login;
             user.PasswordHash = PasswordHash;
             user.PasswordSalt = PasswordSalt;
+
+
 
             await _userRepository.CreateAsync(user, token);
         }

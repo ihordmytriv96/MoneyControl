@@ -4,6 +4,6 @@ namespace MoneyControl.WebAPI.Domain.Entities
 {
     public class ExpensesType : BaseEntity
     {
-        public string TypeName { get; set; }
+        public string TypeName { get; set; } 
     }
 }
