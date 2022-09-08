@@ -23,7 +23,8 @@ namespace MoneyControl.WebAPI.Application.Services.Authorization.Utilities
         {
             List<Claim> claims = new()
             {
-                new Claim(ClaimTypes.Name, user.Login)
+                new Claim(ClaimTypes.Name, user.Login),
+                new Claim(ClaimTypes.NameIdentifier, user.Id)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));

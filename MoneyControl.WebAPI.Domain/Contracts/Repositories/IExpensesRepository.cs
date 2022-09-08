@@ -2,7 +2,7 @@
 
 namespace MoneyControl.WebAPI.Domain.Contracts.Repositories
 {
-    public interface IExpencesRepository : IBaseRepository<Expences>
+    public interface IExpensesRepository : IBaseRepository<Expenses>
     {
     }
 }
