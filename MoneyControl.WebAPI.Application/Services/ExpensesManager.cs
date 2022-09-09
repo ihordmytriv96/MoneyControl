@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MoneyControl.WebAPI.Application.Contracts;
+using MoneyControl.WebAPI.Application.Services.Models;
 using MoneyControl.WebAPI.Domain.Contracts.Repositories;
 using MoneyControl.WebAPI.Domain.Entities;
 using System.Security.Claims;
@@ -36,5 +37,15 @@ namespace MoneyControl.WebAPI.Application.Services
             return await _expensesRepository.RemoveAsync(Id, token);
             
         }
+
+        public FullExpensesModel CreateFullExpenses(User user, ExpensesType expensesType, Expenses expenses)
+        => new FullExpensesModel()
+        {
+            MoneySpend = expenses.MoneySpent,
+            ExpensesType = expensesType.TypeName,
+            WhenSpend = expenses.WhenSpent,
+            UserFirstName = user.FirstName,
+            UserLastName = user.LastName
+        };
     }
 }

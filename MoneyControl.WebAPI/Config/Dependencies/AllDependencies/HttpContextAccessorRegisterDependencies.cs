@@ -4,7 +4,7 @@
     {
         public static void RegisterDependencies(IServiceCollection services)
         {
-            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
         }
     }
 }
