@@ -12,11 +12,11 @@ namespace MoneyControl.WebAPI.Host.Controllers
     public class AuthorizationController : Controller
     {
         private readonly IAuthorizationManager _authManager;
-        private readonly IBaseValidator<UserModel> _userValidator;
+        private readonly IBaseValidator<RegisterUserModel> _userValidator;
         private readonly ITokenRefresher _tokenRefresher;
 
         public AuthorizationController(IAuthorizationManager authManager,
-            IBaseValidator<UserModel> userValidator,
+            IBaseValidator<RegisterUserModel> userValidator,
             ITokenRefresher tokenRefresher)
         {
             _authManager = authManager;
@@ -25,7 +25,7 @@ namespace MoneyControl.WebAPI.Host.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] UserModel model, CancellationToken token)
+        public async Task<ActionResult> Login([FromBody] LoginUserModel model, CancellationToken token)
         {
             var accessToken = await _authManager.LoginAsync(model, token);
             return Ok(accessToken);
@@ -40,7 +40,7 @@ namespace MoneyControl.WebAPI.Host.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult> RegisterUser([FromBody] UserModel model, CancellationToken token)
+        public async Task<ActionResult> RegisterUser([FromBody] RegisterUserModel model, CancellationToken token)
         {
             var validList = await _userValidator.IsValidAsync(model, token);
             if (validList.Any())

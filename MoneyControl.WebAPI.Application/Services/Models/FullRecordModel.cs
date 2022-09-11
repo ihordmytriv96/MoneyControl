@@ -1,6 +1,6 @@
 ﻿namespace MoneyControl.WebAPI.Application.Services.Models
 {
-    public class FullExpensesModel
+    public class FullRecordModel
     {
         public string UserFirstName { get; set; }
         public string UserLastName { get; set; }

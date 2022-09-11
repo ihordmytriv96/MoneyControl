@@ -9,7 +9,7 @@ namespace MoneyControl.WebAPI.Host.Config.Dependencies.AllDependencies
     {
         public static void RegisterDependencies(IServiceCollection services)
         {
-            services.AddTransient<IBaseValidator<UserModel>, UserValidationManager>();
+            services.AddTransient<IBaseValidator<RegisterUserModel>, UserValidationManager>();
             services.AddTransient<IBaseValidator<ExpensesType>, ExpensesTypeValidationManager>();
         }
     }

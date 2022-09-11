@@ -6,23 +6,23 @@ using System.Linq.Expressions;
 
 namespace MoneyControl.WebAPI.Data.Filter
 {
-    public class ExpensesFilter : IEntityFilter<Expenses, IExpensesFilterModel>
+    public class RecordFilter : IEntityFilter<Record, IExpensesFilterModel>
     {
         private readonly IPredicateBuilder _predicateBuilder;
 
-        public ExpensesFilter(IPredicateBuilder predicateBuilder)
+        public RecordFilter(IPredicateBuilder predicateBuilder)
         {
             _predicateBuilder = predicateBuilder;
         }
 
-        public Expression<Func<Expenses, bool>> Filter(IExpensesFilterModel model)
+        public Expression<Func<Record, bool>> Filter(IExpensesFilterModel model)
         {
             if (model == null)
             {
                 throw new ArgumentNullException(nameof(model));
             }
 
-            var result = _predicateBuilder.True<Expenses>();
+            var result = _predicateBuilder.True<Record>();
 
             if (model.ExpensesAddedDateStart.HasValue)
             {

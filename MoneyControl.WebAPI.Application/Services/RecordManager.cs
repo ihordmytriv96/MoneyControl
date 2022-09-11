@@ -7,19 +7,29 @@ using System.Security.Claims;
 
 namespace MoneyControl.WebAPI.Application.Services
 {
-    public class ExpensesManager : IExpensesManager
+    public class RecordManager : IRecordManager
     {
-        private readonly IExpensesRepository _expensesRepository;
+        private readonly IRecordRepository _expensesRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ExpensesManager(IExpensesRepository expensesRepository,
+        public RecordManager(IRecordRepository expensesRepository,
             IHttpContextAccessor httpContextAccessor)
         {
             _expensesRepository = expensesRepository;
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<Expenses> CreateExpenses(Expenses expenses, CancellationToken token)
+        public FullRecordModel CreateFullRecordModel(User user, ExpensesType expensesType, Record record)
+        => new FullRecordModel()
+        {
+            ExpensesType = expensesType.TypeName,
+            MoneySpend = record.MoneySpent,
+            WhenSpend = record.WhenSpent,
+            UserFirstName = user.FirstName,
+            UserLastName = user.LastName
+        };
+
+        public async Task<Record> CreateRecordAsync(Record expenses, CancellationToken token)
         {
             expenses.WhenSpent = DateTime.UtcNow;
             expenses.UserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value; 
@@ -27,25 +37,15 @@ namespace MoneyControl.WebAPI.Application.Services
             return await _expensesRepository.CreateAsync(expenses, token);
         }
 
-        public async Task<List<Expenses>> GetAllExpenses(CancellationToken token)
+        public async Task<List<Record>> GetAllRecordsAsync(CancellationToken token)
         {
             return await _expensesRepository.GetAllAsync(token);
         }
 
-        public async Task<Expenses> RemoveExpenses(string Id, CancellationToken token)
+        public async Task<Record> RemoveRecordAsync(string Id, CancellationToken token)
         {
             return await _expensesRepository.RemoveAsync(Id, token);
             
         }
-
-        public FullExpensesModel CreateFullExpenses(User user, ExpensesType expensesType, Expenses expenses)
-        => new FullExpensesModel()
-        {
-            MoneySpend = expenses.MoneySpent,
-            ExpensesType = expensesType.TypeName,
-            WhenSpend = expenses.WhenSpent,
-            UserFirstName = user.FirstName,
-            UserLastName = user.LastName
-        };
     }
 }

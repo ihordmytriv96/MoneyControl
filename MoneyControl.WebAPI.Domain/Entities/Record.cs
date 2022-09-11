@@ -2,7 +2,7 @@
 
 namespace MoneyControl.WebAPI.Domain.Entities
 {
-    public class Expenses : BaseEntity
+    public class Record : BaseEntity
     {
         public DateTime WhenSpent { get; set; }
         public string ExpensesTypeId { get; set; }
