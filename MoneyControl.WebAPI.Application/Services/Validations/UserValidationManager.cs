@@ -1,10 +1,10 @@
-﻿using MoneyControl.WebAPI.Application.Contracts.Validations;
-using MoneyControl.WebAPI.Application.Services.Models.AuthModels;
+﻿using MoneyControl.WebAPI.Application.Contracts.Models.AuthModels;
+using MoneyControl.WebAPI.Application.Contracts.Validations;
 using MoneyControl.WebAPI.Domain.Contracts.Repositories;
 
 namespace MoneyControl.WebAPI.Application.Services.Validations
 {
-    public class UserValidationManager : IBaseValidator<RegisterUserModel>
+    public class UserValidationManager : IBaseValidator<IRegisterUserModel>
     {
         private readonly IUserRepository _userRepository;
 
@@ -13,7 +13,7 @@ namespace MoneyControl.WebAPI.Application.Services.Validations
             _userRepository = userRepository;
         }
 
-        public async Task<List<string>> IsValidAsync(RegisterUserModel user, CancellationToken token)
+        public async Task<List<string>> IsValidAsync(IRegisterUserModel user, CancellationToken token)
         {
             var login = string.IsNullOrEmpty(user.Login);
             var password = string.IsNullOrEmpty(user.Password);
