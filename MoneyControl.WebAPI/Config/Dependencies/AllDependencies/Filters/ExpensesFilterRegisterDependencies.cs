@@ -9,7 +9,7 @@ namespace MoneyControl.WebAPI.Host.Config.Dependencies.AllDependencies.Filters
     {
         public static void RegisterDependencies(IServiceCollection services)
         {
-            services.AddTransient<IEntityFilter<Expenses, IExpensesFilterModel>, ExpensesFilter>();
+            services.AddTransient<IEntityFilter<Payment, IExpensesFilterModel>, PaymentFilter>();
         }
     }
 }

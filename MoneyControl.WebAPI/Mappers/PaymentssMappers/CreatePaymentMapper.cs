@@ -3,10 +3,10 @@ using MoneyControl.WebAPI.Host.Models.ExpensesModels;
 
 namespace MoneyControl.WebAPI.Host.Mappers.ExpensesMappers
 {
-    public class CreateExpensesMapper : IBaseMapper<CreateExpensesModel, Expenses>
+    public class CreatePaymentMapper : IBaseMapper<CreatePaymentModel, Payment>
     {
-        public Expenses Map(CreateExpensesModel model)
-        => new Expenses()
+        public Payment Map(CreatePaymentModel model)
+        => new Payment()
         {
             MoneySpent = model.MoneySpent,
             ExpensesTypeId = model.ExpensesTypeId,

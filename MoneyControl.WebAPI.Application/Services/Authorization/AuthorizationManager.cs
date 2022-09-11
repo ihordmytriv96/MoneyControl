@@ -27,7 +27,7 @@ namespace MoneyControl.WebAPI.Application.Services.Authorization
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<string> LoginAsync(UserModel userModel, CancellationToken token)
+        public async Task<string> LoginAsync(LoginUserModel userModel, CancellationToken token)
         {
             var user = (await _userRepository.FindAsync(x => x.Login == userModel.Login, token)).FirstOrDefault();
             if (user == null)
@@ -61,15 +61,13 @@ namespace MoneyControl.WebAPI.Application.Services.Authorization
             await _userRepository.UpdateAsync(user, token);
         }
 
-        public async Task RegisterUserAsync(UserModel userModel, CancellationToken token)
+        public async Task RegisterUserAsync(RegisterUserModel userModel, CancellationToken token)
         {
             User user = new User();
             _hashProcessor.CreatePasswordHash(userModel.Password, out byte[] PasswordHash, out byte[] PasswordSalt);
             user.Login = userModel.Login;
             user.PasswordHash = PasswordHash;
             user.PasswordSalt = PasswordSalt;
-
-
 
             await _userRepository.CreateAsync(user, token);
         }

@@ -29,7 +29,7 @@ namespace MoneyControl.WebAPI.Host.Controllers
         [HttpGet()]
         public async Task<ActionResult> GetExpensesType(string Id, CancellationToken token)
         {
-            var result = (await _expensesTypeManager.GetExpensesType(Id, token)).Id;
+            var result = (await _expensesTypeManager.GetExpensesTypeAsync(Id, token)).Id;
             return Ok(result);
         }
 
@@ -42,7 +42,7 @@ namespace MoneyControl.WebAPI.Host.Controllers
             {
                 return BadRequest(validation);
             }
-            var result = (await _expensesTypeManager.CreateNewExpensesType(modelMap, token)).Id;
+            var result = (await _expensesTypeManager.CreateNewExpensesTypeAsync(modelMap, token)).Id;
 
             return Ok(result);
         }
@@ -50,7 +50,7 @@ namespace MoneyControl.WebAPI.Host.Controllers
         [HttpDelete("delete-expenses-type")]
         public async Task<ActionResult> DeleteExpensesType(string Id, CancellationToken token)
         {
-            await _expensesTypeManager.RemoveExpensesType(Id, token);
+            await _expensesTypeManager.RemoveExpensesTypeAsync(Id, token);
             return Ok("Removed successfully");
         }
 

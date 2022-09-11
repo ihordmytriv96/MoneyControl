@@ -4,9 +4,9 @@ using MoneyControl.WebAPI.Domain.Entities;
 
 namespace MoneyControl.WebAPI.Data.Repositories
 {
-    public class MongoExpensesRepository : MongoBaseRepository<Expenses>, IExpensesRepository
+    public class MongoPaymentRepository : MongoBaseRepository<Payment>, IPaymentRepository
     {
-        public MongoExpensesRepository(IMongoDbSettings settings) : base(settings)
+        public MongoPaymentRepository(IMongoDbSettings settings) : base(settings)
         {
         }
         public override string CollectionName { get; set; } = "Expenses";
