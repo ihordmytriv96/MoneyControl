@@ -5,11 +5,11 @@ using MoneyControl.WebAPI.Domain.Entities;
 
 namespace MoneyControl.WebAPI.Host.Config.Dependencies.AllDependencies.Filters
 {
-    public static class ExpensesFilterRegisterDependencies
+    public static class PaymentFilterRegisterDependencies
     {
         public static void RegisterDependencies(IServiceCollection services)
         {
-            services.AddTransient<IEntityFilter<Payment, IExpensesFilterModel>, PaymentFilter>();
+            services.AddTransient<IEntityFilter<Payment, IPaymentFilterModel>, PaymentFilter>();
         }
     }
 }

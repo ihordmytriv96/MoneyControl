@@ -7,7 +7,7 @@ using MoneyControl.WebAPI.Domain.Contracts.Filter;
 using MoneyControl.WebAPI.Domain.Contracts.Repositories;
 using MoneyControl.WebAPI.Domain.Entities;
 using MoneyControl.WebAPI.Host.Mappers;
-using MoneyControl.WebAPI.Host.Models.ExpensesModels;
+using MoneyControl.WebAPI.Host.Models.PaymentsModels;
 
 namespace MoneyControl.WebAPI.Host.Controllers
 {
@@ -16,40 +16,40 @@ namespace MoneyControl.WebAPI.Host.Controllers
     [Route("api/[controller]")]
     public class PaymentsController : Controller
     {
-        private readonly IPaymentsManager _expensesManager;
-        private readonly IBaseMapper<CreatePaymentModel, Payment> _expensesMapper;
+        private readonly IPaymentsManager _paymentsManager;
+        private readonly IBaseMapper<CreatePaymentModel, Payment> _createPaymentMapper;
         private readonly IExpensesTypeManager _expensesTypeManager;
         private readonly IUserRepository _userRepository;
-        private readonly IPaymentRepository _expensesRepository;
-        private readonly IEntityFilter<Payment, IExpensesFilterModel> _expensesFilter;
+        private readonly IPaymentRepository _paymentRepository;
+        private readonly IEntityFilter<Payment, IPaymentFilterModel> _paymentFilter;
 
-        public PaymentsController(IPaymentsManager expensesManager,
-            IBaseMapper<CreatePaymentModel, Payment> expensesMapper,
+        public PaymentsController(IPaymentsManager paymentsManager,
+            IBaseMapper<CreatePaymentModel, Payment> createPaymentMapper,
             IExpensesTypeManager expensesTypeManager,
             IUserRepository userRepository,
-            IPaymentRepository expensesTypeRepository,
-            IEntityFilter<Payment, IExpensesFilterModel> expensesFilter)
+            IPaymentRepository paymentRepository,
+            IEntityFilter<Payment, IPaymentFilterModel> paymentFilter)
         {
-            _expensesManager = expensesManager;
-            _expensesMapper = expensesMapper;
+            _paymentsManager = paymentsManager;
+            _createPaymentMapper = createPaymentMapper;
             _expensesTypeManager = expensesTypeManager;
             _userRepository = userRepository;
-            _expensesRepository = expensesTypeRepository;
-            _expensesFilter = expensesFilter;
+            _paymentRepository = paymentRepository;
+            _paymentFilter = paymentFilter;
         }
 
-        [HttpGet("get-all-expenses")]
-        public async Task<ActionResult> GetAllExpenses([FromQuery] PaymentFilterModel filterModel, CancellationToken token)
+        [HttpGet]
+        public async Task<ActionResult> GetAllPayments([FromQuery] PaymentFilterModel filterModel, CancellationToken token)
         {
-            var allExpenses = await _expensesRepository.FindAsync(_expensesFilter.Filter(filterModel), token);
+            var allPayments = await _paymentRepository.FindAsync(_paymentFilter.Filter(filterModel), token);
             var result = new List<FullPaymentModel>();
-            foreach (var expenses in allExpenses)
+            foreach (var payment in allPayments)
             {
-                var user = await _userRepository.FindOneAsync(x => x.Id == expenses.UserId, token);
-                var expensesType = await _expensesTypeManager.GetExpensesTypeAsync(expenses.ExpensesTypeId, token);
-                var fullExpenses = _expensesManager.CreateFullPaymentModel(user, expensesType, expenses);
+                var user = await _userRepository.FindOneAsync(x => x.Id == payment.UserId, token);
+                var expensesType = await _expensesTypeManager.GetExpensesTypeAsync(payment.ExpensesTypeId, token);
+                var PaymentModel = _paymentsManager.CreateFullPaymentModel(user, expensesType, payment);
 
-                result.Add(fullExpenses);
+                result.Add(PaymentModel);
             }
 
             if (!result.Any())
@@ -62,13 +62,17 @@ namespace MoneyControl.WebAPI.Host.Controllers
             }
         }
 
-        [HttpPost("create-expenses")]
-        public async Task<ActionResult> CreateExpenses([FromBody] CreatePaymentModel model, CancellationToken token)
+        [HttpPost]
+        public async Task<ActionResult> CreatePayment([FromBody] CreatePaymentModel model, CancellationToken token)
         {
-            var expencesMap = _expensesMapper.Map(model);
-            var result = await _expensesManager.CreatePaymentAsync(expencesMap, token);
+            var paymentMap = _createPaymentMapper.Map(model);
+            var createPayment = await _paymentsManager.CreatePaymentAsync(paymentMap, token);
+            var expensesType = await _expensesTypeManager.GetExpensesTypeAsync(model.ExpensesTypeId, token);
+            var user = await _userRepository.GetAsync(createPayment.UserId, token);
 
-            return Ok(result);
+            var paymentModel = _paymentsManager.CreateFullPaymentModel(user, expensesType, createPayment);
+
+            return Ok(paymentModel);
         }
 
     }

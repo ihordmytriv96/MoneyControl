@@ -1,4 +1,6 @@
 ﻿using MoneyControl.WebAPI.Host.Config.Dependencies.AllDependencies;
+using MoneyControl.WebAPI.Host.Config.Dependencies.AllDependencies.Filters;
+using MoneyControl.WebAPI.Host.Config.Dependencies.AllDependencies.Models;
 
 namespace MoneyControl.WebAPI.Host.Config.Dependencies
 {
@@ -19,6 +21,12 @@ namespace MoneyControl.WebAPI.Host.Config.Dependencies
             ValidatorsRegisterDependencies.RegisterDependencies(services);
             ExpensesTypeManagerRegisterDependencies.RegisterDepenedencies(services);
             PaymentsManagerRegisterDependencies.RegisterDependencies(services);
+            LoginUserModelRegisterDependencies.RegisterDependencies(services);
+            RegisterUserModelRegisterDependencies.RegisterDependencies(services);
+            PredicateBuilderRegisterDependencies.RegisterDependencies(services);
+            PaymentFilterRegisterDependencies.RegisterDependencies(services);
+            ExpensesTypeFilterRegisterDependencies.RegisterDependencies(services);
+            MoneyLimiterManagerRegisterDependencies.RegisterDependencies(services);
 
             // Mapper
 

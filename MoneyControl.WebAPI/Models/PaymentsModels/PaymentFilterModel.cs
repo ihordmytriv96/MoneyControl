@@ -1,17 +1,17 @@
 ﻿using MoneyControl.WebAPI.Data.Filter.Contracts;
 using Newtonsoft.Json;
 
-namespace MoneyControl.WebAPI.Host.Models.ExpensesModels
+namespace MoneyControl.WebAPI.Host.Models.PaymentsModels
 {
-    public class PaymentFilterModel : IExpensesFilterModel
+    public class PaymentFilterModel : IPaymentFilterModel
     {
-        [JsonProperty("expensesAddedDateStart")]
-        public DateTime? ExpensesAddedDateStart { get; set; }
-        [JsonProperty("expensesAddedDateEnD")]
-        public DateTime? ExpensesAddedDateEnd { get; set; }
+        [JsonProperty("paymentAddedDateStart")]
+        public DateTime? PaymentAddedDateStart { get; set; }
+        [JsonProperty("paymentAddedDateEnD")]
+        public DateTime? PaymentAddedDateEnd { get; set; }
         [JsonProperty("expensesTypeId")]
         public List<string> ExpensesTypeId { get; set; }
         [JsonProperty("moneySpend")]
-        public decimal? MoneySpend { get; set; }
+        public double? MoneySpend { get; set; }
     }
 }

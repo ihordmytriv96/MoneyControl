@@ -9,42 +9,51 @@ namespace MoneyControl.WebAPI.Application.Services
 {
     public class PaymentsManager : IPaymentsManager
     {
-        private readonly IPaymentRepository _expensesRepository;
+        private readonly IPaymentRepository _paymentRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IMoneyLimiterRepository _moneyLimiterRepository;
 
-        public PaymentsManager(IPaymentRepository expensesRepository,
-            IHttpContextAccessor httpContextAccessor)
+        public PaymentsManager(IPaymentRepository paymentRepository,
+            IHttpContextAccessor httpContextAccessor,
+            IMoneyLimiterRepository moneyLimiterRepository)
         {
-            _expensesRepository = expensesRepository;
+            _paymentRepository = paymentRepository;
             _httpContextAccessor = httpContextAccessor;
+            _moneyLimiterRepository = moneyLimiterRepository;
         }
 
-        public FullPaymentModel CreateFullPaymentModel(User user, ExpensesType expensesType, Payment record)
+        public FullPaymentModel CreateFullPaymentModel(User user, ExpensesType expensesType, Payment payment)
         => new FullPaymentModel()
         {
             ExpensesType = expensesType.TypeName,
-            MoneySpend = record.MoneySpent,
-            WhenSpend = record.WhenSpent,
+            MoneySpend = payment.MoneySpent,
+            WhenSpend = payment.WhenSpent,
             UserFirstName = user.FirstName,
             UserLastName = user.LastName
         };
-
-        public async Task<Payment> CreatePaymentAsync(Payment expenses, CancellationToken token)
+       
+        public async Task<Payment> CreatePaymentAsync(Payment payment, CancellationToken token)
         {
-            expenses.WhenSpent = DateTime.UtcNow;
-            expenses.UserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value; 
+            payment.WhenSpent = DateTime.UtcNow;
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            payment.UserId = userId;
+            var userLimiter = (await _moneyLimiterRepository.FindAsync(x => x.UserId == userId, token)).Where(x=>x.ExpensesTypeId == payment.ExpensesTypeId).FirstOrDefault();
+            if (userLimiter != null)
+            {
+                userLimiter.MoneySpent += payment.MoneySpent;
+            }
             
-            return await _expensesRepository.CreateAsync(expenses, token);
+            return await _paymentRepository.CreateAsync(payment, token);
         }
 
         public async Task<List<Payment>> GetAllPaymentsAsync(CancellationToken token)
         {
-            return await _expensesRepository.GetAllAsync(token);
+            return await _paymentRepository.GetAllAsync(token);
         }
 
         public async Task<Payment> RemovePaymentAsync(string Id, CancellationToken token)
         {
-            return await _expensesRepository.RemoveAsync(Id, token);
+            return await _paymentRepository.RemoveAsync(Id, token);
             
         }
     }

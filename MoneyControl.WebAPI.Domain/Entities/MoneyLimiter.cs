@@ -5,9 +5,10 @@ namespace MoneyControl.WebAPI.Domain.Entities
     public class MoneyLimiter : BaseEntity
     {
         public string ExpensesTypeId { get; set; }
-        public DateTime LimitStart { get; set; }
-        public DateTime LimitEnd { get; set; }
-        public decimal MoneySpent { get; set; }
-        public decimal MoneyLimit { get; set; }
+        public DateTime? LimitStart { get; set; }
+        public DateTime? LimitEnd { get; set; }
+        public double? MoneySpent { get; set; }
+        public double? MoneyLimit { get; set; }
+        public string UserId { get; set; } 
     }
 }

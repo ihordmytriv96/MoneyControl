@@ -1,7 +1,7 @@
 ﻿using MoneyControl.WebAPI.Domain.Entities;
-using MoneyControl.WebAPI.Host.Models.ExpensesModels;
+using MoneyControl.WebAPI.Host.Models.PaymentsModels;
 
-namespace MoneyControl.WebAPI.Host.Mappers.ExpensesMappers
+namespace MoneyControl.WebAPI.Host.Mappers.PaymentsMappers
 {
     public class CreatePaymentMapper : IBaseMapper<CreatePaymentModel, Payment>
     {

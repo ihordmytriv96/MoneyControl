@@ -7,6 +7,6 @@ namespace MoneyControl.WebAPI.Domain.Entities
         public DateTime WhenSpent { get; set; }
         public string ExpensesTypeId { get; set; }
         public string UserId { get; set; }
-        public decimal MoneySpent { get; set; }
+        public double MoneySpent { get; set; }
     }
 }
