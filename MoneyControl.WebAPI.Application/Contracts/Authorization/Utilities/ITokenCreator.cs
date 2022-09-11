@@ -1,5 +1,4 @@
-﻿using MoneyControl.WebAPI.Application.Services.Models.AuthModels;
-using MoneyControl.WebAPI.Domain.Entities;
+﻿using MoneyControl.WebAPI.Domain.Entities;
 
 namespace MoneyControl.WebAPI.Application.Contracts.Authorization.Utilities
 {

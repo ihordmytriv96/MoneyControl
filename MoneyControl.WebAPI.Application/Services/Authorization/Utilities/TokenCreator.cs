@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MoneyControl.WebAPI.Application.Contracts.Authorization.Utilities;
-using MoneyControl.WebAPI.Application.Services.Models.AuthModels;
 using MoneyControl.WebAPI.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

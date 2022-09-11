@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MoneyControl.WebAPI.Application.Contracts.Authorization;
 using MoneyControl.WebAPI.Application.Contracts.Authorization.Utilities;
+using MoneyControl.WebAPI.Application.Contracts.Models.AuthModels;
 using MoneyControl.WebAPI.Application.Exceptions;
-using MoneyControl.WebAPI.Application.Services.Models.AuthModels;
 using MoneyControl.WebAPI.Domain.Contracts.Repositories;
 using MoneyControl.WebAPI.Domain.Entities;
 using System.Security.Claims;
@@ -27,7 +27,7 @@ namespace MoneyControl.WebAPI.Application.Services.Authorization
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<string> LoginAsync(LoginUserModel userModel, CancellationToken token)
+        public async Task<string> LoginAsync(ILoginUserModel userModel, CancellationToken token)
         {
             var user = (await _userRepository.FindAsync(x => x.Login == userModel.Login, token)).FirstOrDefault();
             if (user == null)
@@ -61,7 +61,7 @@ namespace MoneyControl.WebAPI.Application.Services.Authorization
             await _userRepository.UpdateAsync(user, token);
         }
 
-        public async Task RegisterUserAsync(RegisterUserModel userModel, CancellationToken token)
+        public async Task RegisterUserAsync(IRegisterUserModel userModel, CancellationToken token)
         {
             User user = new User();
             _hashProcessor.CreatePasswordHash(userModel.Password, out byte[] PasswordHash, out byte[] PasswordSalt);

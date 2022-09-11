@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MoneyControl.WebAPI.Application.Contracts.Authorization;
 using MoneyControl.WebAPI.Application.Contracts.Authorization.Utilities;
+using MoneyControl.WebAPI.Application.Contracts.Models.AuthModels;
 using MoneyControl.WebAPI.Application.Contracts.Validations;
-using MoneyControl.WebAPI.Application.Services.Models.AuthModels;
+using MoneyControl.WebAPI.Host.Models.UserModels;
 
 namespace MoneyControl.WebAPI.Host.Controllers
 {
@@ -12,11 +13,11 @@ namespace MoneyControl.WebAPI.Host.Controllers
     public class AuthorizationController : Controller
     {
         private readonly IAuthorizationManager _authManager;
-        private readonly IBaseValidator<RegisterUserModel> _userValidator;
+        private readonly IBaseValidator<IRegisterUserModel> _userValidator;
         private readonly ITokenRefresher _tokenRefresher;
 
         public AuthorizationController(IAuthorizationManager authManager,
-            IBaseValidator<RegisterUserModel> userValidator,
+            IBaseValidator<IRegisterUserModel> userValidator,
             ITokenRefresher tokenRefresher)
         {
             _authManager = authManager;
