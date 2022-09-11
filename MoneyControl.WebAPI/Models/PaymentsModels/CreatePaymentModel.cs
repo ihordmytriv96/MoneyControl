@@ -2,7 +2,7 @@
 
 namespace MoneyControl.WebAPI.Host.Models.ExpensesModels
 {
-    public class CreateRecordModel
+    public class CreatePaymentModel
     {
         [JsonProperty("expensesTypeId")]
         public string ExpensesTypeId { get; set; }

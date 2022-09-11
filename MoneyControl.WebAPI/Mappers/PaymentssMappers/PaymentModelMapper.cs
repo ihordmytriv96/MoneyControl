@@ -4,10 +4,10 @@ using MoneyControl.WebAPI.Host.Models.ExpensesTypeModels;
 
 namespace MoneyControl.WebAPI.Host.Mappers.ExpencesMappers
 {
-    public class RecordModelMapper : IBaseMapper<Record, RecordModel>
+    public class PaymentModelMapper : IBaseMapper<Payment, PaymentModel>
     {
-        public RecordModel Map(Record map)
-        => new RecordModel()
+        public PaymentModel Map(Payment map)
+        => new PaymentModel()
         {
             MoneySpent = map.MoneySpent,
             WhenSpent = map.WhenSpent

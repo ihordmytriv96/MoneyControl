@@ -18,7 +18,7 @@ namespace MoneyControl.WebAPI.Host.Config.Dependencies
             AuthorizationManagerRegisterDependencies.RegisterDependencies(services);
             ValidatorsRegisterDependencies.RegisterDependencies(services);
             ExpensesTypeManagerRegisterDependencies.RegisterDepenedencies(services);
-            RecordManagerRegisterDependencies.RegisterDependencies(services);
+            PaymentsManagerRegisterDependencies.RegisterDependencies(services);
 
             // Mapper
 

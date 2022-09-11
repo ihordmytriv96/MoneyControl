@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace MoneyControl.WebAPI.Host.Models.ExpensesModels
 {
-    public class RecordModel
+    public class PaymentModel
     {
         [JsonProperty("userName")]
         public UserNameModel UserName { get; set; }

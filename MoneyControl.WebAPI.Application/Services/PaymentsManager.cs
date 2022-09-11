@@ -7,20 +7,20 @@ using System.Security.Claims;
 
 namespace MoneyControl.WebAPI.Application.Services
 {
-    public class RecordManager : IRecordManager
+    public class PaymentsManager : IPaymentsManager
     {
-        private readonly IRecordRepository _expensesRepository;
+        private readonly IPaymentRepository _expensesRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public RecordManager(IRecordRepository expensesRepository,
+        public PaymentsManager(IPaymentRepository expensesRepository,
             IHttpContextAccessor httpContextAccessor)
         {
             _expensesRepository = expensesRepository;
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public FullRecordModel CreateFullRecordModel(User user, ExpensesType expensesType, Record record)
-        => new FullRecordModel()
+        public FullPaymentModel CreateFullPaymentModel(User user, ExpensesType expensesType, Payment record)
+        => new FullPaymentModel()
         {
             ExpensesType = expensesType.TypeName,
             MoneySpend = record.MoneySpent,
@@ -29,7 +29,7 @@ namespace MoneyControl.WebAPI.Application.Services
             UserLastName = user.LastName
         };
 
-        public async Task<Record> CreateRecordAsync(Record expenses, CancellationToken token)
+        public async Task<Payment> CreatePaymentAsync(Payment expenses, CancellationToken token)
         {
             expenses.WhenSpent = DateTime.UtcNow;
             expenses.UserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value; 
@@ -37,12 +37,12 @@ namespace MoneyControl.WebAPI.Application.Services
             return await _expensesRepository.CreateAsync(expenses, token);
         }
 
-        public async Task<List<Record>> GetAllRecordsAsync(CancellationToken token)
+        public async Task<List<Payment>> GetAllPaymentsAsync(CancellationToken token)
         {
             return await _expensesRepository.GetAllAsync(token);
         }
 
-        public async Task<Record> RemoveRecordAsync(string Id, CancellationToken token)
+        public async Task<Payment> RemovePaymentAsync(string Id, CancellationToken token)
         {
             return await _expensesRepository.RemoveAsync(Id, token);
             

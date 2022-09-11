@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace MoneyControl.WebAPI.Host.Models.ExpensesModels
 {
-    public class RecordFilterModel : IExpensesFilterModel
+    public class PaymentFilterModel : IExpensesFilterModel
     {
         [JsonProperty("expensesAddedDateStart")]
         public DateTime? ExpensesAddedDateStart { get; set; }

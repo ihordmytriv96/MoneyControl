@@ -12,7 +12,7 @@ namespace MoneyControl.WebAPI.Host.Config.Dependencies.AllDependencies
         public static void RegisterDependencies(IServiceCollection services)
         {
             services.AddTransient<IBaseMapper<ExpensesTypeModel, ExpensesType>, ExpensesTypeMapper>();
-            services.AddTransient<IBaseMapper<CreateRecordModel, Record>, CreateRecordMapper>();
+            services.AddTransient<IBaseMapper<CreatePaymentModel, Payment>, CreatePaymentMapper>();
         }
     }
 }
