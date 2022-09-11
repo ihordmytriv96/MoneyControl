@@ -8,6 +8,7 @@ namespace MoneyControl.WebAPI.Host.Mappers.ExpencesTypeMappers
         public ExpensesTypeModel Map(ExpensesType map)
         => new ExpensesTypeModel()
         {
+            ExpensesTypeId = map.Id,
             TypeName = map.TypeName
         };
     }

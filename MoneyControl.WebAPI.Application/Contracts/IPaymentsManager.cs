@@ -5,9 +5,9 @@ namespace MoneyControl.WebAPI.Application.Contracts
 {
     public interface IPaymentsManager
     {
-        public Task<Payment> CreatePaymentAsync(Payment Expenses, CancellationToken token);
+        public Task<Payment> CreatePaymentAsync(Payment payment, CancellationToken token);
         public Task<Payment> RemovePaymentAsync(string Id, CancellationToken token);
         public Task<List<Payment>> GetAllPaymentsAsync(CancellationToken token);
-        public FullPaymentModel CreateFullPaymentModel(User user, ExpensesType expensesType, Payment record);
+        public FullPaymentModel CreateFullPaymentModel(User user, ExpensesType expensesType, Payment payment);
     }
 }

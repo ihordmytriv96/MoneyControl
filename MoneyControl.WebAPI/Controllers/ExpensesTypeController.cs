@@ -16,24 +16,28 @@ namespace MoneyControl.WebAPI.Host.Controllers
         private readonly IExpensesTypeManager _expensesTypeManager;
         private readonly IBaseMapper<ExpensesTypeModel, ExpensesType> _expencesTypeMapper;
         private readonly IBaseValidator<ExpensesType> _expencesTypeValidator;
+        private readonly IBaseMapper<ExpensesType, ExpensesTypeModel> _expencesTypeModelMapper;
 
         public ExpensesTypeController(IExpensesTypeManager expensesTypeManager,
             IBaseMapper<ExpensesTypeModel,ExpensesType> expencesTypeMapper,
-            IBaseValidator<ExpensesType> expencesTypeValidator)
+            IBaseValidator<ExpensesType> expencesTypeValidator,
+            IBaseMapper<ExpensesType, ExpensesTypeModel> expencesTypeModelMapper)
         {
             _expensesTypeManager = expensesTypeManager;
             _expencesTypeMapper = expencesTypeMapper;
             _expencesTypeValidator = expencesTypeValidator;
+            _expencesTypeModelMapper = expencesTypeModelMapper;
         }
 
-        [HttpGet()]
-        public async Task<ActionResult> GetExpensesType(string Id, CancellationToken token)
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetExpensesType(string id, CancellationToken token)
         {
-            var result = (await _expensesTypeManager.GetExpensesTypeAsync(Id, token)).Id;
+            var expensesType = (await _expensesTypeManager.GetExpensesTypeAsync(id, token));
+            var result = _expencesTypeModelMapper.Map(expensesType);
             return Ok(result);
         }
 
-        [HttpPost("create-expenses-type")]
+        [HttpPost]
         public async Task<ActionResult> CreateExpensesType(ExpensesTypeModel model, CancellationToken token)
         {
             var modelMap = _expencesTypeMapper.Map(model);
@@ -47,7 +51,7 @@ namespace MoneyControl.WebAPI.Host.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("delete-expenses-type")]
+        [HttpDelete]
         public async Task<ActionResult> DeleteExpensesType(string Id, CancellationToken token)
         {
             await _expensesTypeManager.RemoveExpensesTypeAsync(Id, token);

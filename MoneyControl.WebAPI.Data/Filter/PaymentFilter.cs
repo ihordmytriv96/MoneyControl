@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace MoneyControl.WebAPI.Data.Filter
 {
-    public class PaymentFilter : IEntityFilter<Payment, IExpensesFilterModel>
+    public class PaymentFilter : IEntityFilter<Payment, IPaymentFilterModel>
     {
         private readonly IPredicateBuilder _predicateBuilder;
 
@@ -15,7 +15,7 @@ namespace MoneyControl.WebAPI.Data.Filter
             _predicateBuilder = predicateBuilder;
         }
 
-        public Expression<Func<Payment, bool>> Filter(IExpensesFilterModel model)
+        public Expression<Func<Payment, bool>> Filter(IPaymentFilterModel model)
         {
             if (model == null)
             {
@@ -24,14 +24,14 @@ namespace MoneyControl.WebAPI.Data.Filter
 
             var result = _predicateBuilder.True<Payment>();
 
-            if (model.ExpensesAddedDateStart.HasValue)
+            if (model.PaymentAddedDateStart.HasValue)
             {
-                result = _predicateBuilder.And(result, x => x.WhenSpent >= model.ExpensesAddedDateStart); 
+                result = _predicateBuilder.And(result, x => x.WhenSpent >= model.PaymentAddedDateStart); 
             }
 
-            if (model.ExpensesAddedDateEnd.HasValue)
+            if (model.PaymentAddedDateEnd.HasValue)
             {
-                result = _predicateBuilder.And(result, x => x.WhenSpent <= model.ExpensesAddedDateEnd);
+                result = _predicateBuilder.And(result, x => x.WhenSpent <= model.PaymentAddedDateEnd);
             }
 
             if (model.MoneySpend.HasValue)
